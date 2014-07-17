@@ -1,5 +1,5 @@
 /***************************************************************************
-*   © 2012,2014 Advanced Micro Devices, Inc. All rights reserved.
+*   ï¿½ 2012,2014 Advanced Micro Devices, Inc. All rights reserved.
 *
 *   Licensed under the Apache License, Version 2.0 (the "License");
 *   you may not use this file except in compliance with the License.
@@ -126,8 +126,6 @@ const std::streamsize colWidth = 26;
 #ifndef DATA_TYPE   
     #define DATA_TYPE float
 #endif
-
-#include "data_type.h"
 
 #if (BOLT_BENCHMARK == 1)
     #if BENCHMARK_CL_AMP == CL_BENCH
@@ -303,6 +301,7 @@ using namespace std;
  *****************************************************************************/
 DATA_TYPE v1init = {1};
 DATA_TYPE v1iden = {0};
+#include "data_type.h"
 vec2 v2init = { 1, 1 };
 vec2 v2iden = { 0, 0 };
 vec4 v4init = { 1, 1, 1, 1 };
@@ -390,9 +389,7 @@ void executeFunctionType(
     {
     case f_merge:
         { 
-           /* for(int i =0;i<input1.size();i++)
-                std::cout<<input1[i]<<" ";
-            std::cout<<"\n";*/
+          
             std::cout <<  functionNames[f_merge] << std::endl;
 #if (BOLT_BENCHMARK == 1)
             bolt::BENCH_BEND::sort( ctrl, input1.begin( ), input1.end( ), binaryPredLt);
@@ -1636,3 +1633,4 @@ int main( int argc, char* argv[] )
     outFile.close();
     return 0;
 }
+

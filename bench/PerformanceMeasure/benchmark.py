@@ -65,7 +65,7 @@ if (args.iterations and args.length and args.routine and args.lib_option):
 	#python commonPerformance.py --label reduce_bolt_device --library=BOLT --routine=reduce --memory device -l 1024-33554432:x2 --tablefile reduce_bolt_device.txt
 	if sys.argv[8] == 'bolt':
 		string = " --label "\
-		"boltOCL_Tahiti7970 --library=BOLT --routine="\
+		"boltOCL_HawaiiXT --library=BOLT --routine="\
 		+sys.argv[2]+" --memory device -l "\
 		+sys.argv[4]+" -i "\
 		+sys.argv[6]+" --tablefile "\
@@ -78,7 +78,7 @@ if (args.iterations and args.length and args.routine and args.lib_option):
 		+sys.argv[4]+" -i "\
 		+sys.argv[6]+" --tablefile "\
 		+sys.argv[2]+"_boltOCL_host.txt";
-		os.system('python commonPerformance.py%s'%string)'''
+		os.system('python commonPerformance.py%s'%string)
 		
 		string = " --label "\
 		"tbb --library=TBB --routine="\
@@ -111,7 +111,7 @@ if (args.iterations and args.length and args.routine and args.lib_option):
 		+sys.argv[2]+"_boltOCL_device.txt -d "\
 		+sys.argv[2]+"_tbb_host.txt --outputfile "\
 		+sys.argv[2]+"Perf_boltOCLDevice_tbbHost.pdf";
-		os.system('python plotPerformance.py%s'%string)
+		os.system('python plotPerformance.py%s'%string)'''
 		
 		print("generate the individual graph for Bolt_With_DeviceVector")
 		string = " --y_axis_label \"MKeys/sec\" --title \""\
@@ -153,7 +153,7 @@ if (args.iterations and args.length and args.routine and args.lib_option):
 		os.system('python plotPerformance.py%s'%string)
 	else:
 		string = " --label "\
-		"BoltAmp_tahiti7970 --library=AMP --routine="\
+		"BoltAmp_HawaiiXT --library=AMP --routine="\
 		+sys.argv[2]+" --memory device -l "\
 		+sys.argv[4]+" -i "\
 		+sys.argv[6]+" --tablefile "\
@@ -166,7 +166,7 @@ if (args.iterations and args.length and args.routine and args.lib_option):
 		+sys.argv[4]+" -i "\
 		+sys.argv[6]+" --tablefile "\
 		+sys.argv[2]+"_amp_host.txt";
-		os.system('python commonPerformance.py%s'%string)'''
+		os.system('python commonPerformance.py%s'%string)
 		
 		string = " --label "\
 		+sys.argv[2]+"_tbb_host --library=TBB --routine="\
@@ -182,7 +182,7 @@ if (args.iterations and args.length and args.routine and args.lib_option):
 		+sys.argv[2]+"_Boltamp_device.txt -d "\
 		+sys.argv[2]+"_tbb_host.txt --outputfile "\
 		+sys.argv[2]+"Perf_BoltampDevice_tbbHost.pdf";
-		os.system('python plotPerformance.py%s'%string)
+		os.system('python plotPerformance.py%s'%string)'''
 		
 		print("generate the individual graph for amp_With_DeviceVector")
 		string = " --y_axis_label \"MKeys/sec\" --title \""\

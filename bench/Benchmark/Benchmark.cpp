@@ -1,5 +1,5 @@
 /***************************************************************************
-*   © 2012,2014 Advanced Micro Devices, Inc. All rights reserved.
+*   ? 2012,2014 Advanced Micro Devices, Inc. All rights reserved.
 *
 *   Licensed under the Apache License, Version 2.0 (the "License");
 *   you may not use this file except in compliance with the License.
@@ -124,7 +124,7 @@
 const std::streamsize colWidth = 26;
 
 #ifndef DATA_TYPE   
-    #define DATA_TYPE float
+    #define DATA_TYPE unsigned int
 #endif
 
 #if (BOLT_BENCHMARK == 1)
@@ -138,7 +138,7 @@ const std::streamsize colWidth = 26;
 // function generator:
 #if (BOLT_BENCHMARK == 1)
     std::default_random_engine gen;
-    std::uniform_real_distribution<DATA_TYPE> distr(10,1<<30);
+    std::uniform_int_distribution<DATA_TYPE> distr(10,1<<30);
     DATA_TYPE RandomNumber() 
     {    
         DATA_TYPE dice_roll = (DATA_TYPE)distr(gen); // generates number in the range 10..1<<31
@@ -809,7 +809,7 @@ void executeFunctionType(
             {
                 myTimer.Start( testId );
 #if (BOLT_BENCHMARK == 1)
-                bolt::BENCH_BEND::inclusive_scan(ctrl, input1.begin(), input1.end(), output.begin(), binaryFunct );
+                bolt::BENCH_BEND::inclusive_scan(ctrl, input1.begin(), input1.end(), input1.begin(), binaryFunct );
 #if BENCHMARK_CL_AMP == AMP_BENCH
                 Amp_GPU_wait(ctrl);
 #endif
@@ -979,9 +979,9 @@ void executeFunction(
         std::vector<int> Map(length);
         std::vector<DATA_TYPE> input1(length);
         std::vector<DATA_TYPE> input2(length);
-        std::vector<DATA_TYPE> input3(length);
-        std::vector<DATA_TYPE> output(length);
-        std::vector<DATA_TYPE> output_merge(length*2) ;
+        std::vector<DATA_TYPE> input3(1);
+        std::vector<DATA_TYPE> output(1);
+        std::vector<DATA_TYPE> output_merge(1*2) ;
         std::generate(input1.begin(), input1.end(), RandomNumber);
         std::generate(input2.begin(), input2.end(), RandomNumber);
         std::generate(input3.begin(), input3.end(), RandomNumber);
