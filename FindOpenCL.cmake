@@ -65,9 +65,11 @@ find_path( OPENCL_INCLUDE_DIRS
 mark_as_advanced( OPENCL_INCLUDE_DIRS )
 
 # Search for 64bit libs if FIND_LIBRARY_USE_LIB64_PATHS is set to true in the global environment, 32bit libs else
+unset(LIB64 CACHE)
 get_property( LIB64 GLOBAL PROPERTY FIND_LIBRARY_USE_LIB64_PATHS )
-
+unset(OPENCL_LIBRARIES CACHE)
 if( LIB64 )
+	message( STATUS "***************64 bit OPENCL_LIBRARIES SEARCH" )
 	find_library( OPENCL_LIBRARIES
 		NAMES OpenCL
 		HINTS
@@ -78,6 +80,7 @@ if( LIB64 )
 		PATH_SUFFIXES x86_64 x64
 	)
 else( )
+	message( STATUS "***************32 bit OPENCL_LIBRARIES SEARCH" )
 	find_library( OPENCL_LIBRARIES
 		NAMES OpenCL
 		HINTS
@@ -85,9 +88,10 @@ else( )
 			$ENV{OPENCL_ROOT}/lib
 			$ENV{AMDAPPSDKROOT}/lib
 		DOC "OpenCL dynamic library path"
-		PATH_SUFFIXES x86
+		PATH_SUFFIXES x86	
 	)
 endif( )
+message( STATUS "OPENCL_LIBRARY is found installed in the path:" ${OPENCL_LIBRARIES} )
 mark_as_advanced( OPENCL_LIBRARIES )
 
 include( FindPackageHandleStandardArgs )

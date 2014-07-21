@@ -74,14 +74,17 @@ if ( NOT TBB_ROOT )
 else ( ) 
     # Search for 64bit libs if FIND_LIBRARY_USE_LIB64_PATHS is set to true in the global environment, 32bit libs else
     get_property( LIB64 GLOBAL PROPERTY FIND_LIBRARY_USE_LIB64_PATHS )
-
+    
     if( LIB64 )
+	message( "*****************************IN LIB64.")
         set(TBB_ARCH_PLATFORM intel64)
     else( )
+	message( "*****************************IN LIB32.")
         set(TBB_ARCH_PLATFORM ia32)
     endif( )    
     
-    message ( STATUS "TBB_LIB: " ${LIB64} )
+    message ( STATUS "TBB_LIB64: " ${LIB64} )
+    message ( STATUS "TBB_ARCH_PLATFORM: " ${TBB_ARCH_PLATFORM} )
 
     #Find TBB header files
     find_path( TBB_INCLUDE_DIRS 
@@ -94,6 +97,11 @@ else ( )
     
     #Find TBB Libraries
     set (_TBB_LIBRARY_DIR ${TBB_ROOT}/lib/${TBB_ARCH_PLATFORM} )
+    unset(TBB_LIBRARY CACHE)
+    unset(TBB_MALLOC_LIBRARY CACHE)
+    unset(TBB_LIBRARY_DEBUG CACHE)
+    unset(TBB_MALLOC_LIBRARY_DEBUG CACHE)
+
     find_library(TBB_LIBRARY ${_TBB_LIB_NAME} HINTS ${_TBB_LIBRARY_DIR}/${TBB_COMPILER}
                 PATHS ENV LIBRARY_PATH ENV LD_LIBRARY_PATH)
     find_library(TBB_MALLOC_LIBRARY ${_TBB_LIB_MALLOC_NAME} HINTS ${_TBB_LIBRARY_DIR}/${TBB_COMPILER}
@@ -101,7 +109,8 @@ else ( )
     find_library(TBB_LIBRARY_DEBUG ${_TBB_LIB_DEBUG_NAME} HINTS ${_TBB_LIBRARY_DIR}/${TBB_COMPILER}
                 PATHS ENV LIBRARY_PATH ENV LD_LIBRARY_PATH)
     find_library(TBB_MALLOC_LIBRARY_DEBUG ${_TBB_LIB_MALLOC_DEBUG_NAME} HINTS ${_TBB_LIBRARY_DIR}/${TBB_COMPILER}
-                PATHS ENV LIBRARY_PATH ENV LD_LIBRARY_PATH)        
+                PATHS ENV LIBRARY_PATH ENV LD_LIBRARY_PATH)  
+     
 
     message ( STATUS "TBB_LIBRARY:" ${TBB_LIBRARY})
     message ( STATUS "TBB_MALLOC_LIBRARY:" ${TBB_MALLOC_LIBRARY})
